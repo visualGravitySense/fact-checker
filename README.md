@@ -48,6 +48,7 @@ After training, the model will use the trained classifier for more accurate pred
 - `requirements.txt` - Python dependencies
 - `task.md` - method description
 - `image.png` - method diagram
+- `GRADIENTS.md` - detailed explanation of gradient analysis
 
 ## How It Works
 
