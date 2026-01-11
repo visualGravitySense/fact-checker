@@ -1,63 +1,63 @@
 # Face Real/Fake Detector
 
-Программа для определения, является ли лицо на изображении реальным или сгенерированным AI (deepfake), используя анализ градиентов и ковариационных матриц.
+A program to determine whether a face in an image is real or AI-generated (deepfake) using gradient and covariance matrix analysis.
 
-## Метод
+## Method
 
-Программа реализует метод, описанный в `task.md`:
+The program implements the method described in `task.md`:
 
-1. **Преобразование в яркость**: Изображение конвертируется в градации серого (luminance)
-2. **Вычисление градиентов**: Вычисляются горизонтальные (Gx) и вертикальные (Gy) градиенты яркости
-3. **Ковариационная матрица**: Создается матрица M из всех градиентных векторов и вычисляется ковариационная матрица C = (1/N) * M^T * M
-4. **Извлечение признаков**: Из ковариационной матрицы извлекаются статистические признаки (собственные значения, след, определитель и др.)
-5. **Классификация**: Используется машинное обучение или эвристический метод для определения реальности изображения
+1. **Luminance Conversion**: The image is converted to grayscale (luminance)
+2. **Gradient Computation**: Horizontal (Gx) and vertical (Gy) brightness gradients are computed
+3. **Covariance Matrix**: A matrix M is created from all gradient vectors and the covariance matrix C = (1/N) * M^T * M is computed
+4. **Feature Extraction**: Statistical features are extracted from the covariance matrix (eigenvalues, trace, determinant, etc.)
+5. **Classification**: Machine learning or heuristic methods are used to determine if the image is real
 
-## Установка
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Использование
+## Usage
 
-### Базовое использование (без обучения)
+### Basic Usage (without training)
 
 ```bash
 python face_real_fake_detector.py path/to/image.jpg
 ```
 
-### Анализ всего изображения (без детекции лица)
+### Analyze Entire Image (without face detection)
 
 ```bash
 python face_real_fake_detector.py path/to/image.jpg --no-face-detection
 ```
 
-### Обучение модели на размеченных данных
+### Train Model on Labeled Data
 
-Для лучшей точности можно обучить модель на наборе данных:
+For better accuracy, you can train the model on a dataset:
 
 ```bash
 python face_real_fake_detector.py dummy.jpg --train --real-dir ./real_faces --fake-dir ./fake_faces
 ```
 
-После обучения модель будет использовать обученный классификатор для более точных предсказаний.
+After training, the model will use the trained classifier for more accurate predictions.
 
-## Структура проекта
+## Project Structure
 
-- `face_real_fake_detector.py` - основной скрипт с классом `FaceRealFakeDetector`
-- `requirements.txt` - зависимости Python
-- `task.md` - описание метода
-- `image.png` - диаграмма метода
+- `face_real_fake_detector.py` - main script with `FaceRealFakeDetector` class
+- `requirements.txt` - Python dependencies
+- `task.md` - method description
+- `image.png` - method diagram
 
-## Как это работает
+## How It Works
 
-1. **Детекция лица**: Используется Haar Cascade для обнаружения лица на изображении
-2. **Анализ градиентов**: Реальные изображения имеют более структурированные и согласованные градиенты, соответствующие физической структуре объекта
-3. **Статистический анализ**: Ковариационная матрица градиентов показывает паттерны, которые отличаются в реальных и сгенерированных изображениях
-4. **Классификация**: Извлеченные признаки используются для определения, является ли изображение реальным или поддельным
+1. **Face Detection**: Haar Cascade is used to detect faces in the image
+2. **Gradient Analysis**: Real images have more structured and consistent gradients that correspond to the physical structure of objects
+3. **Statistical Analysis**: The covariance matrix of gradients reveals patterns that differ between real and generated images
+4. **Classification**: Extracted features are used to determine whether the image is real or fake
 
-## Примечания
+## Notes
 
-- Без обучения модель использует эвристический метод с низкой уверенностью
-- Для лучших результатов рекомендуется обучить модель на размеченных данных
-- Метод работает лучше всего на изображениях лиц с хорошим освещением и разрешением
+- Without training, the model uses a heuristic method with low confidence
+- For best results, it is recommended to train the model on labeled data
+- The method works best on face images with good lighting and resolution
